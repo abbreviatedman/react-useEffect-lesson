@@ -26,7 +26,7 @@ function Timer() {
     }, 1000);
   }, []);
 
-  return <div>{numSeconds} numSeconds have passed</div>;
+  return <div>{numSeconds} seconds have passed</div>;
 }
 
 export default Timer;
@@ -40,7 +40,7 @@ Import this component into your `App.js` file and render it. You should see a ti
 
 Since side effects are outside of React's system, it doesn't have a built-in way to handle them. Which makes sense--you don't want to build code into React for managing timers, cancelling network or database calls, working with DOM elements _without_ the Virtual DOM, and so on. React gives us powerful tools to weave our side effects into our interface, but we have to take responsibility for them if we want an effective app.
 
-One of the major aspects we often have to deal with when performing a side effect is cleaning up after an ongoing effect. `useEffect` can also, optionally, return a function to be called when it's time to take the component off the DOM. React calls our returned function whenever the component is taken off the DOM, or "unmounted", which usually happens when the user navigates to a new part of our app or takes an action that removes a component from a list of components (think a todo list deletion).
+One of the major aspects we often have to deal with when performing a side effect is cleaning up after an ongoing effect. The callback in `useEffect` can also, optionally, return a function to be called when it's time to take the component off the DOM. React calls our returned function whenever the component is taken off the DOM, or "unmounted", which usually happens when the user navigates to a new part of our app or takes an action that removes a component from a list of components (think a todo list deletion).
 
 In the case of our timer, if the user navigates to another part of our app, we want to stop the timer from firing off every second. JavaScript's `setInterval` function returns an ID we can pass to the built-in `clearInterval` function to cancel the timer, and we can return a function from `useEffect` to utilize `clearInterval` to do so.
 
