@@ -177,8 +177,6 @@ useEffect(() => {
 </div>
 ```
 
-Let me know when you've completed this step and are ready to move on.
-
 ##### Putting It All Together
 
 Combine the components (Search Bar, Display Area, and Toggle Functionality) to create a cohesive user experience.
