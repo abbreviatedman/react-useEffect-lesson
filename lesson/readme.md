@@ -213,7 +213,39 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    async function fetchPosts () {
+      const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+      const data = await response.json();
+      setPosts(data);
+    };
+
+    fetchPosts();
+  }, []);
+
+  return (
+    <div className="App container-fluid">
+      <h1>Posts</h1>
+      <div className="posts"></div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+##### Render Posts
+
+Map over the `posts` state and render a `Post` component for each post.
+
+```jsx
+import { useState, useEffect } from "react";
+import Post from "./Post";
+
+function App() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    async function fetchPosts () {
       const response = await fetch(
         "https://jsonplaceholder.typicode.com/posts"
       );
@@ -247,10 +279,8 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
+    async function fetchPosts () {
+      const response = await fetch("https://jsonplaceholder.typicode.com/posts");
       const data = await response.json();
       setPosts(data);
     };
@@ -261,7 +291,11 @@ function App() {
   return (
     <div className="App container-fluid">
       <h1>Posts</h1>
-      <div className="posts"></div>
+      <div className="posts">
+        {posts.map((post) => (
+          <Post key={post.id} title={post.title} body={post.body} />
+        ))}
+      </div>
     </div>
   );
 }
